@@ -1,0 +1,6 @@
+node_modules/
+.env/
+.env.google.ini
+dist/
+*.log
+dummy.js
