@@ -14,8 +14,6 @@ const genAI = new GoogleGenAI({
   apiKey: process.env.GOOGLE_API_KEY,
 });
 
-// const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
 function toGeminiHistory(messages) {
   return messages
     .filter((m) => m.content && m.content.trim().length > 0)
@@ -46,10 +44,6 @@ app.post("/api/chat", async (req, res) => {
     const history = toGeminiHistory(messages.slice(0, -1));
     const userPrompt = last.content || "";
 
-    // const chat = model.startChat({ history });
-    // const result = await chat.sendMessage(userPrompt);
-    // const text = result.response.text();
-    //   res.json({ text });
     const response = await genAI.models.generateContent({
       model: "gemini-2.5-flash",
       contents: [...history.map((h) => h.parts[0].text), userPrompt],
@@ -65,8 +59,7 @@ app.post("/api/chat", async (req, res) => {
 const PORT = process.env.PORT || 8787;
 app.listen(PORT, () => {
   console.log(
-    // `Using Google API Key: ${process.env.GOOGLE_API_KEY ? "Yes" : "No"}`
-    process.env.GOOGLE_API_KEY
+    `Using Google API Key: ${process.env.GOOGLE_API_KEY ? "Yes" : "No"}`
   );
   console.log(`Server listening on port ${PORT}`);
 });
