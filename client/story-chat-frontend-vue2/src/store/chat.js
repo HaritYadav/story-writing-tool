@@ -1,4 +1,4 @@
-import { sendChat } from "@/services.api";
+import { sendChat } from "../services/api.js";
 
 const initialMessage = [
   {
@@ -16,13 +16,12 @@ export default {
   }),
   getters: {
     messages: (s) => s.messages,
-    loading: (s) => s,
-    loading,
+    loading: (s) => s.loading,
     error: (s) => s.error,
   },
   mutations: {
     PUSH_MESSAGE(state, msg) {
-      state.message.push(msg);
+      state.messages.push(msg);
     },
     SET_LOADING(state, loading_val) {
       state.loading = loading_val;
