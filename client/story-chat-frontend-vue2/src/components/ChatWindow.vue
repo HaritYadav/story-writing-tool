@@ -42,7 +42,7 @@ export default {
   min-height: 70vh;
 }
 .footer {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   gap: 8px;
   margin-top: 8px;
