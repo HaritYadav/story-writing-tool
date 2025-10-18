@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  // making the jsconfig stricter, else it keeps looking for phantom files
+  // like HelloWorld.vue that were created during auto build
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
