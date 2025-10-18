@@ -1,16 +1,18 @@
 <template>
-  <form class="row" @submit.prevent="onSend">
-    <textarea
-      type="text"
-      v-model="storyPromptInput"
-      :disabled="disabled"
-      placeholder="Type prompt for story here..."
-      @keydown.enter.exact.prevent="onSend"
-      ref="inputBox"
-      @input="autoGrow"
-    />
-    <button :disabled="disabled || !trimmed">Send</button>
-  </form>
+  <div>
+    <form class="row" @submit.prevent="onSend">
+      <textarea
+        type="text"
+        v-model="storyPromptInput"
+        :disabled="disabled"
+        placeholder="Type prompt for story here..."
+        @keydown.enter.exact.prevent="onSend"
+        ref="inputBox"
+        @input="autoGrow"
+      />
+      <button :disabled="disabled || !trimmed">Write Chapter</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -42,6 +44,7 @@ export default {
       if (!this.trimmed || this.disabled) return;
       this.$emit("send", this.trimmed);
       this.storyPromptInput = "";
+      this.$nextTick(this.autoGrow);
     },
   },
 };
