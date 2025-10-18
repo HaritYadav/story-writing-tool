@@ -32,7 +32,7 @@ export default {
     },
   },
   actions: {
-    async refereshTImeline({ rootState, state, commit }) {
+    async refereshTimeline({ rootState, state, commit }) {
       const newMessages = rootState.chat.messages.filter(
         (m) => m.id > state.lastMessageIdAnalyzed
       );
@@ -44,9 +44,10 @@ export default {
       try {
         const result = await refreshTimelineAPI({
           currentTimeline: state.timeline,
-          newContext: newMessages,
+          newMessages: newMessages,
         });
-        commit("SET_CHARACTERS", result.timeline || state.timeline);
+
+        commit("SET_TIMELINE", result.timeline || state.timeline);
         if (typeof result.upToMessageId === "number") {
           commit("SET_LAST_ANALYZED_MESSAGE_ID", result.upToMessageId);
         } else {

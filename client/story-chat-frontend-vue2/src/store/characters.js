@@ -43,8 +43,8 @@ export default {
 
       try {
         const result = await refreshCharactersAPI({
-          currentCharacterSet: state.characters,
-          newContext: newMessages,
+          currentCharacters: state.characters,
+          newMessages: newMessages,
         });
         commit("SET_CHARACTERS", result.characters || state.characters);
         if (typeof result.upToMessageId === "number") {

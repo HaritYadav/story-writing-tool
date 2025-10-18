@@ -62,8 +62,10 @@ app.post("/api/chat", async (req, res) => {
 
 app.post("/api/analyze/characters", async (req, res) => {
   try {
+    console.log(req.body);
     const { currentCharacters = [], newMessages = [] } = req.body || {};
-
+    console.log(currentCharacters);
+    console.log(newMessages);
     const systemInstructions = `Extract or update a compact roster of characters from provided conversation chunks.
     Return STRICT JSON as in below schema,
   {
@@ -86,6 +88,7 @@ app.post("/api/analyze/characters", async (req, res) => {
           "Your task is to look at chat histroy, current messages and current character roster and then update the character roster accordingly. Your resppnse should be onle and exactly a json. Do not add anything except the JSON response.",
       },
     });
+    console.log(response.text);
 
     let parsed;
     try {
@@ -130,6 +133,7 @@ app.post("/api/analyze/characters", async (req, res) => {
 
 app.post("/api/analyze/timeline", async (req, res) => {
   try {
+    console.log(req.body);
     const { currentTimeline = [], newMessages = [] } = req.body || {};
 
     const systemInstructions = `Extract or update a story timeline from provided conversation chunks.
@@ -154,9 +158,11 @@ app.post("/api/analyze/timeline", async (req, res) => {
       contents: prompt,
       config: {
         systemInstruction:
-          "Your task is to look at chat histroy, current messages and current character roster and then update the character roster accordingly. Your resppnse should be onle and exactly a json. Do not add anything except the JSON response.",
+          "Your task is to look at chat history, current messages and current character roster and then update the character roster accordingly. Your resppnse should be onle and exactly a json. Do not add anything except the JSON response.",
       },
     });
+
+    console.log(response.text);
 
     let parsed;
     try {
@@ -199,7 +205,7 @@ app.post("/api/analyze/timeline", async (req, res) => {
     }
 
     return res.json({
-      characters: parsed.timeline ?? currentTimeline,
+      timeline: parsed.timeline ?? currentTimeline,
       upToMessageId,
     });
   } catch (error) {

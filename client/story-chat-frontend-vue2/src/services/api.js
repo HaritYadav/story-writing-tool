@@ -10,18 +10,18 @@ export async function sendChat(messages) {
   return data;
 }
 
-export async function refreshCharactersAPI(currentCharacterSet, newContext) {
+export async function refreshCharactersAPI({ currentCharacters, newMessages }) {
   const { data } = await api.post("/api/analyze/characters", {
-    ...currentCharacterSet,
-    ...newContext,
+    currentCharacters: currentCharacters,
+    newMessages: newMessages,
   });
   return data; // {updatedCharacterSet, upToMessageId}
 }
 
-export async function refreshTimelineAPI(currentTimeline, newContext) {
+export async function refreshTimelineAPI({ currentTimeline, newMessages }) {
   const { data } = await api.post("/api/analyze/timeline", {
-    ...currentTimeline,
-    ...newContext,
+    currentTimeline: currentTimeline,
+    newMessages: newMessages,
   });
   return data; // {updatedTimeline, upToMessgeId}
 }
